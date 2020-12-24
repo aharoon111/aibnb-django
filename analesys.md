@@ -22,6 +22,7 @@ Blog :
     -publish date
     -author
     -content
+    -category*
 ==============================================
 about :
     -about

@@ -22,7 +22,7 @@ Blog :
     -publish date
     -author
     -content
-
+==============================================
 about :
     -about
         -image
@@ -32,7 +32,7 @@ about :
     -faq
         -title
         -description
-
+==============================================
 site info(contact) :
     -site name
     -logo
@@ -43,7 +43,6 @@ site info(contact) :
     -place
     -phone
     -email
-
+==============================================
 
                                      5 models will be devides into apps every related models will be in the same app 
-                                     

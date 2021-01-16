@@ -1,12 +1,13 @@
 from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import User
+from taggit.managers import TaggableManager
 # Create your models here.
 
 class Post(models.Model):
     title = models.CharField( max_length=50)
     image = models.ImageField(upload_to='post/')
-    #tags = ''
+    tags = TaggableManager()
     publish_date = models.DateTimeField(default=timezone.now)
     auther = models.ForeignKey(User, related_name='Post_author', on_delete=models.CASCADE)
     content = models.CharField(max_length=2500)
@@ -14,7 +15,7 @@ class Post(models.Model):
     
     
     def __str__(self):
-        pass
+        return (Post.title)
 
     class Meta:
         verbose_name = 'Post'
@@ -26,7 +27,7 @@ class Category(models.Model):
     
     
     def __str__(self):
-        pass
+        return (Category.title)
 
     class Meta:
         verbose_name = 'Category'

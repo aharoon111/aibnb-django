@@ -1,11 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import user
+from django.contrib.auth.models import User
+from django.db.models.enums import Choices
 from django.utils import timezone
 
 # Create your models here.
 
 class Property(models.Model):
-    owner = models.ForeignKey(user, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.TextField(max_length=50)
     price = models.IntegerField("")
     description = models.TextField(max_length=1200)
@@ -16,7 +17,7 @@ class Property(models.Model):
 
 
     def __str__(self):
-        return str(self.name)
+        return self.name
 
 
 class Property_image(models.Model):
@@ -44,8 +45,8 @@ class Category(models.Model):
 
 
 class Property_review(models.Model):
-    user = models.ForeignKey("user", verbose_name=_("review_auther"), on_delete=models.CASCADE)
-    property = models.ForeignKey(property,related_name = 'property_review' on_delete=models.CASCADE)
+    user = models.ForeignKey(User, verbose_name=("review_auther"), on_delete=models.CASCADE)
+    property = models.ForeignKey(Property,related_name = 'property_review', on_delete=models.CASCADE)
     rate = models.IntegerField(default=0)
     feedback = models.TextField(max_length=1200)
     
@@ -61,12 +62,12 @@ class Property_review(models.Model):
 
 
 Count_Choices = (
-    (1 , 1)
-    (2 , 2)
-    (3 , 3)
-    (4 , 4)
-    (5 , 5)
-)
+    (1 , 1),
+    (2 , 2),
+    (3 , 3),
+    (4 , 4),
+    (5 , 5),
+   )
 
 
 
@@ -74,13 +75,13 @@ class Property_Book(models.Model):
     """Model definition for Property_Book."""
 
     # TODO: Define fields here
-    property = models.ForeignKey(property,related_name = 'property_review' on_delete=models.CASCADE)
+    property = models.ForeignKey(Property,related_name = 'property_book', on_delete=models.CASCADE)
     name = models.TextField(max_length=50)
     email = models.EmailField(max_length=50)
     from_Date = models.DateField(default=timezone.now)
     to_Date = models.DateField(default=timezone.now)
-    children = models.IntegerField(Choices=Count_Choices)
-    guest = models.IntegerField(Choices=Count_Choices)
+    children = models.IntegerField(choices= Count_Choices)
+    guest = models.IntegerField(choices= Count_Choices)
 
     
     class Meta:
